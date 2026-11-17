@@ -41,6 +41,23 @@ class HomepageTests(unittest.TestCase):
         ids = [attrs["id"] for _, attrs in self.page.elements if "id" in attrs]
         self.assertEqual(len(ids), len(set(ids)))
 
+    def test_official_homepage_metadata_and_share_link(self):
+        official_url = "https://darwin-agent.github.io/"
+        canonical = [attrs["href"] for tag, attrs in self.page.elements
+                     if tag == "link" and attrs.get("rel") == "canonical"]
+        social_url = [attrs["content"] for tag, attrs in self.page.elements
+                      if tag == "meta" and attrs.get("property") == "og:url"]
+        share_links = [attrs["href"] for attrs in self.page.links
+                       if "share-qr" in attrs.get("class", "").split()]
+        self.assertEqual(canonical, [official_url])
+        self.assertEqual(social_url, [official_url])
+        self.assertEqual(share_links, [official_url])
+        self.assertNotIn("shaokun91.github.io", self.html)
+
+    def test_brand_story_explains_the_shared_identity(self):
+        self.assertIn("Experience becomes action. Feedback drives evolution.", self.html)
+        self.assertIn("D surrounds A; A reaches outward.", self.html)
+
     def test_fragment_links_and_accessible_labels_resolve(self):
         ids = {attrs["id"] for _, attrs in self.page.elements if "id" in attrs}
         for link in self.page.links:

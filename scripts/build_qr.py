@@ -15,7 +15,7 @@ from qrcode.constants import ERROR_CORRECT_H
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "assets"
-URL = "https://shaokun91.github.io/darwin-agent-website/"
+URL = "https://darwin-agent.github.io/"
 INK = "#151714"
 BORDER = 4
 BOX_SIZE = 24
@@ -23,13 +23,10 @@ PLATE_MODULES = 9
 LOGO_MODULES = 8
 
 
-def build():
-    qr = qrcode.QRCode(error_correction=ERROR_CORRECT_H, box_size=BOX_SIZE, border=BORDER)
+def build(name="darwin-agent-qr-da", mark_name="darwin-mark-da-orange.png", mark_description="DA monogram"):
+    qr = qrcode.QRCode(version=6, error_correction=ERROR_CORRECT_H, box_size=BOX_SIZE, border=BORDER)
     qr.add_data(URL, optimize=0)
     qr.make(fit=True)
-    # This URL fits version 6 (41 data modules). Keep the logo clear of all
-    # finder, timing, and alignment patterns; fail rather than silently resize
-    # into a different QR layout if the destination changes in the future.
     if qr.version != 6:
         raise ValueError(f"Review logo placement for QR version {qr.version}")
     matrix = qr.get_matrix()
@@ -49,31 +46,31 @@ def build():
                 cells.append(f"M{x} {y}h1v1h-1z")
     draw.rectangle((plate_start * BOX_SIZE, plate_start * BOX_SIZE,
                     plate_end * BOX_SIZE - 1, plate_end * BOX_SIZE - 1), fill="white")
-    mark = Image.open(ASSETS / "darwin-mark-da-orange.png").convert("RGBA")
+    mark = Image.open(ASSETS / mark_name).convert("RGBA")
     logo = Image.new("RGB", mark.size, "white")
     logo.paste(mark, mask=mark.getchannel("A"))
     logo_pixels = LOGO_MODULES * BOX_SIZE
     image.paste(logo.resize((logo_pixels, logo_pixels), Image.Resampling.LANCZOS),
                 (round(logo_start * BOX_SIZE), round(logo_start * BOX_SIZE)))
-    image.save(ASSETS / "darwin-agent-qr-da.png", optimize=True)
+    image.save(ASSETS / f"{name}.png", optimize=True)
 
-    # Embed the normalized logo, so the downloaded SVG is fully self-contained.
     encoded = BytesIO()
     logo.save(encoded, format="PNG", optimize=True)
     data_url = "data:image/png;base64," + b64encode(encoded.getvalue()).decode("ascii")
     svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{pixels}" height="{pixels}" viewBox="0 0 {extent} {extent}" role="img" aria-labelledby="qr-title qr-description">
   <title id="qr-title">Darwin Agent homepage QR code</title>
-  <desc id="qr-description">High-error-correction QR code for {escape(URL)} with an orange Darwin Agent DA monogram.</desc>
+  <desc id="qr-description">High-error-correction QR code for {escape(URL)} with an orange Darwin Agent {escape(mark_description)}.</desc>
   <rect width="{extent}" height="{extent}" fill="#fff"/>
   <path d="{"".join(cells)}" fill="{INK}" shape-rendering="crispEdges"/>
   <rect x="{plate_start}" y="{plate_start}" width="{PLATE_MODULES}" height="{PLATE_MODULES}" fill="#fff"/>
   <image x="{logo_start}" y="{logo_start}" width="{LOGO_MODULES}" height="{LOGO_MODULES}" href="{data_url}"/>
 </svg>
 '''
-    (ASSETS / "darwin-agent-qr-da.svg").write_text(svg, encoding="utf-8")
+    (ASSETS / f"{name}.svg").write_text(svg, encoding="utf-8")
     print(f"QR v{qr.version}, H correction, {extent} modules including quiet zone, {pixels}px PNG")
     print(URL)
 
 
 if __name__ == "__main__":
     build()
+    build("darwin-agent-qr", "darwin-mark-orange.png", "D monogram")

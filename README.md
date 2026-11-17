@@ -10,7 +10,13 @@ across digital and physical worlds and links to the public Darwin-Agent GitHub
 organization. It keeps the original editorial layout, with new-project shortcuts,
 research directions, and project-specific resource links.
 
-Live site: <https://shaokun91.github.io/darwin-agent-website/>
+Official team site: <https://darwin-agent.github.io/>
+
+Maintained in [Darwin-Agent/darwin-agent.github.io](https://github.com/Darwin-Agent/darwin-agent.github.io).
+This organization-owned deployment preserves the original website and logo work
+by Shaokun in [shaokun91/darwin-agent-website](https://github.com/shaokun91/darwin-agent-website),
+including its Git history. The personal repository is the source provenance,
+not the canonical team website. No new license is assigned to the original assets.
 
 ## Files
 
@@ -21,6 +27,7 @@ Live site: <https://shaokun91.github.io/darwin-agent-website/>
 - `assets/darwin-agent-qr-da.png` — 1176 × 1176 downloadable QR
 - `assets/darwin-mark-da-orange.png` — 1024 × 1024 transparent DA monogram
 - `assets/darwin-mark-da-white.png` — matching white transparent DA monogram
+- `assets/darwin-agent-banner.png` — shared organization profile and social-preview banner
 - `scripts/build_qr.py` — deterministic QR asset generator (development only)
 
 ## Featured research
@@ -38,7 +45,7 @@ Live site: <https://shaokun91.github.io/darwin-agent-website/>
 Open `index.html` directly in a browser, or run a local server:
 
 ```bash
-cd darwin-agent-website
+cd darwin-agent.github.io
 python3 -m http.server 8000
 ```
 
@@ -68,9 +75,14 @@ Before publishing, also check desktop and mobile layouts, keyboard navigation,
 reduced-motion behavior, and new external resource links in a browser. The static
 checks do not make network requests or replace browser QA.
 
-GitHub Pages publishes the repository root from `main`; no build step or client
+GitHub Pages publishes the organization repository root from `main`; no build step or client
 dependencies are required. Push reviewed changes to `main`, wait for the Pages
 deployment, and verify the live site.
+
+Canonical metadata, social sharing, `robots.txt`, `sitemap.xml`, and all homepage
+QR assets use `https://darwin-agent.github.io/`. The organization profile and its
+website field link to this address. Updating or redirecting the original personal
+deployment requires its owner's permission and is not part of this repository.
 
 ## Content sources
 
@@ -106,14 +118,14 @@ HarnessPAI project page. Other existing color accents are retained.
 ### Homepage QR code
 
 The page ends with a scan-and-share section linking directly to
-`https://shaokun91.github.io/darwin-agent-website/`. There is no redirect service,
+`https://darwin-agent.github.io/`. There is no redirect service,
 tracking URL, third-party image dependency, or runtime QR library. The center
 uses an image-generated, interlocking DA monogram, normalized to exact Xiaomi
 orange (`#ff6900`) on white. The same transparent mark appears in the header,
 footer, and favicon. The previous D-only assets remain available at their old
 paths; no existing downloadable asset was deleted.
 
-The QR uses version 6, H error correction, a four-module white quiet zone, and a
+The QR explicitly retains version 6, H error correction, a four-module white quiet zone, and a
 small central logo plate clear of finder, timing, and alignment patterns. The
 SVG embeds its logo and is independently portable; the PNG download is 1176 px.
 
@@ -124,6 +136,9 @@ the decoded URL at several sizes, after rotation, JPEG compression, and grayscal
 conversion. Recheck the decoded URL and layout whenever the destination or logo
 changes. The generator intentionally rejects a different QR version so logo
 placement cannot silently cover a function pattern.
+
+The legacy `darwin-agent-qr.svg` and `darwin-agent-qr.png` paths are retained and
+rebuilt to the same official team URL, with their original D-only logo.
 
 ### DA identity
 

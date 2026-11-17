@@ -12,10 +12,15 @@ except ImportError:
 
 
 ROOT = Path(__file__).resolve().parents[1]
-URL = "https://shaokun91.github.io/darwin-agent-website/"
+URL = "https://darwin-agent.github.io/"
 
 
 class QRAssetTests(unittest.TestCase):
+    def test_legacy_qr_also_uses_the_organization_homepage(self):
+        root = ET.parse(ROOT / "assets/darwin-agent-qr.svg").getroot()
+        namespace = {"svg": "http://www.w3.org/2000/svg"}
+        self.assertIn(URL, root.find("svg:desc", namespace).text)
+
     def test_svg_is_self_contained_and_has_quiet_zone(self):
         root = ET.parse(ROOT / "assets/darwin-agent-qr-da.svg").getroot()
         ns = {"svg": "http://www.w3.org/2000/svg"}
@@ -48,6 +53,10 @@ class QRDecodeTests(unittest.TestCase):
         for size in [1176, 490, 245, 196, 147]:
             with self.subTest(size=size):
                 self.assertDecodes(self.image.resize((size, size), Image.Resampling.LANCZOS))
+
+    def test_legacy_image_uses_the_organization_homepage(self):
+        with Image.open(ROOT / "assets/darwin-agent-qr.png") as image:
+            self.assertDecodes(image.convert("RGB"))
 
     def test_rotation_compression_and_grayscale(self):
         small = self.image.resize((245, 245), Image.Resampling.LANCZOS)
