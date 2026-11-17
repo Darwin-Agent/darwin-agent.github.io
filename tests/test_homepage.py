@@ -55,8 +55,37 @@ class HomepageTests(unittest.TestCase):
         self.assertNotIn("shaokun91.github.io", self.html)
 
     def test_brand_story_explains_the_shared_identity(self):
-        self.assertIn("Experience becomes action. Feedback drives evolution.", self.html)
-        self.assertIn("D surrounds A; A reaches outward.", self.html)
+        self.assertIn("Experience informs action. Action generates feedback. Feedback drives evolution.", self.html)
+        self.assertIn("D surrounds A.<br>A reaches outward.", self.html)
+        self.assertIn("经验沉淀形成行动，行动反馈推动进化。", self.html)
+
+    def test_identity_has_a_visible_mark_and_three_design_principles(self):
+        identities = [attrs for tag, attrs in self.page.elements
+                      if tag == "section" and attrs.get("id") == "identity"]
+        self.assertEqual(len(identities), 1)
+        self.assertEqual(identities[0]["aria-labelledby"], "identity-title")
+        marks = [attrs for tag, attrs in self.page.elements
+                 if tag == "img" and "outward-reaching A" in attrs.get("alt", "")]
+        self.assertEqual(len(marks), 1)
+        for heading in ["D — Darwin", "A — Agent", "Two letters. One system."]:
+            self.assertIn(heading, self.html)
+        self.assertIn("Clear negative space", self.html)
+        self.assertIn('href="#identity"', self.html)
+
+    def test_experience_action_evolution_is_an_ordered_three_step_loop(self):
+        steps = [attrs for tag, attrs in self.page.elements
+                 if tag == "ol" and "evolution-steps" in attrs.get("class", "").split()]
+        self.assertEqual(len(steps), 1)
+        self.assertEqual(steps[0]["aria-label"], "Experience, action, and evolution")
+        for label in ["01 — Experience", "02 — Action", "03 — Evolution"]:
+            self.assertIn(label, self.html)
+        self.assertEqual(sum(tag == "li" for tag, _ in self.page.elements), 3)
+
+    def test_research_agenda_is_system_wide(self):
+        self.assertIn("One system.<br>Many directions.", self.html)
+        for direction in ["Experience & memory", "Harness evolution", "Collective intelligence",
+                          "World modeling &amp; action learning", "Embodied intelligence"]:
+            self.assertIn(direction, self.html)
 
     def test_fragment_links_and_accessible_labels_resolve(self):
         ids = {attrs["id"] for _, attrs in self.page.elements if "id" in attrs}
@@ -144,7 +173,7 @@ class HomepageTests(unittest.TestCase):
         image_path = "./assets/darwin-mark-da-orange.png"
         marks = [attrs for tag, attrs in self.page.elements
                  if tag == "img" and attrs.get("src") == image_path]
-        self.assertEqual(len(marks), 2)
+        self.assertEqual(len(marks), 3)
         icons = [attrs for tag, attrs in self.page.elements
                  if tag == "link" and attrs.get("rel") == "icon"]
         self.assertEqual(icons[0]["href"], image_path)

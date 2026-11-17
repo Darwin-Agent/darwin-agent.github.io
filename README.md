@@ -57,6 +57,9 @@ http://localhost:8000
 
 ## Content themes
 
+- Experience → Action → Evolution as a system-level research ambition
+- A dedicated `#identity` section explaining D, A, their shared connection, and negative space
+- Three stages connecting accumulated experience, action, and evaluated feedback
 - Harness as a first-class, evolvable behavior object
 - Memory as a lifecycle framework with provenance and governance
 - World modeling and action learning across digital environments
@@ -155,3 +158,8 @@ into the asset, do not stretch it, and do not add the old square border. Use the
 monogram alone at small sizes; pair it with the existing Darwin Agent wordmark
 for larger website and presentation applications. A 40 px mark is used in the
 website navigation; the QR logo remains within its tested central safe area.
+
+The homepage also displays the original monogram at larger scale in `#identity`.
+The adjacent design explanation and three-stage learning loop connect the mark
+to the research agenda. This is a statement of research goals, not a claim that
+all public projects already implement an autonomous, end-to-end evolution loop.
