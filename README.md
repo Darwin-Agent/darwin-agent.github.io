@@ -158,7 +158,7 @@ The `#learning` section introduces the three-stage learning loop as a research
 goal, not a claim that all public projects already implement an autonomous,
 end-to-end evolution loop.
 
-The current asset uses the reviewed second candidate. Its silhouette is uniformly
+The current asset uses the reviewed softer third candidate. Its silhouette is uniformly
 scaled and centered to match the previous mark's optical size without stretching.
 The orange and white versions share the same alpha channel; the organization
 banner and QR code are rebuilt from the orange version. The earlier assets remain
