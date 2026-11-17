@@ -123,7 +123,7 @@ HarnessPAI project page. Other existing color accents are retained.
 The page ends with a scan-and-share section linking directly to
 `https://darwin-agent.github.io/`. There is no redirect service,
 tracking URL, third-party image dependency, or runtime QR library. The center
-uses an image-generated, interlocking DA monogram, normalized to exact Xiaomi
+uses the reviewed image-generated DA monogram, normalized to exact Xiaomi
 orange (`#ff6900`) on white. The same transparent mark appears in the header,
 footer, and favicon. The previous D-only assets remain available at their old
 paths; no existing downloadable asset was deleted.
@@ -157,3 +157,9 @@ copy focuses on the team's research rather than explaining the letter geometry.
 The `#learning` section introduces the three-stage learning loop as a research
 goal, not a claim that all public projects already implement an autonomous,
 end-to-end evolution loop.
+
+The current asset uses the reviewed second candidate. Its silhouette is uniformly
+scaled and centered to match the previous mark's optical size without stretching.
+The orange and white versions share the same alpha channel; the organization
+banner and QR code are rebuilt from the orange version. The earlier assets remain
+recoverable through repository history.

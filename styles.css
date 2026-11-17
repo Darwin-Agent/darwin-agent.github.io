@@ -95,13 +95,11 @@ html,body{overflow-x:hidden}
 .share-qr:focus-visible{outline:3px solid var(--xiaomi-orange);outline-offset:5px}
 .share-download:hover{color:#a64200}
 .learning{border-bottom:1px solid var(--line)}
-.learning-motto{margin:48px 0 0;text-align:center;font-size:clamp(18px,2vw,26px);line-height:1.7}
 .evolution-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;list-style:none;margin:0;padding:0}
 .evolution-steps li{padding-top:24px;border-top:2px solid var(--xiaomi-orange)}
 .evolution-steps h3{font-size:23px;margin-bottom:14px}
 .evolution-steps li>p:last-child{color:var(--muted);margin-bottom:0}
 @media(max-width:800px){
-  .learning-motto{margin-top:38px}
   .evolution-steps{grid-template-columns:1fr;gap:28px}
   .footer-share{grid-template-columns:1fr;gap:30px;padding-top:36px;margin-top:10px;text-align:center}
   .share-copy{margin-inline:auto}

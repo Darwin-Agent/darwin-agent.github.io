@@ -1,4 +1,5 @@
 """QR asset checks; optional ZXing checks decode the actual image, not metadata."""
+from base64 import b64decode
 from io import BytesIO
 from pathlib import Path
 import unittest
@@ -77,6 +78,32 @@ class QRDecodeTests(unittest.TestCase):
             orange_pixels = sum(count for count, color in mark.getcolors(mark.width * mark.height)
                                 if color == (255, 105, 0, 255))
             self.assertGreater(orange_pixels, 10000)
+
+    def test_white_variant_has_the_same_transparent_silhouette(self):
+        with Image.open(ROOT / "assets/darwin-mark-da-orange.png") as orange, \
+                Image.open(ROOT / "assets/darwin-mark-da-white.png") as white:
+            self.assertEqual(orange.size, (1024, 1024))
+            self.assertEqual(orange.mode, "RGBA")
+            self.assertEqual(white.mode, "RGBA")
+            self.assertEqual(orange.getchannel("A").tobytes(), white.getchannel("A").tobytes())
+            visible_colors = {color[:3] for _, color in white.getcolors(white.width * white.height)
+                              if color[3]}
+            self.assertEqual(visible_colors, {(255, 255, 255)})
+            for point in [(0, 0), (1023, 0), (0, 1023), (1023, 1023)]:
+                self.assertEqual(orange.getpixel(point)[3], 0)
+
+    def test_svg_and_png_embed_the_current_lettermark(self):
+        namespace = {"svg": "http://www.w3.org/2000/svg"}
+        root = ET.parse(ROOT / "assets/darwin-agent-qr-da.svg").getroot()
+        embedded = root.find("svg:image", namespace)
+        encoded = embedded.attrib["href"].split(",", 1)[1]
+        with Image.open(ROOT / "assets/darwin-mark-da-orange.png") as mark:
+            expected = Image.new("RGB", mark.size, "white")
+            expected.paste(mark, mask=mark.getchannel("A"))
+        with Image.open(BytesIO(b64decode(encoded))) as actual:
+            self.assertEqual(actual.convert("RGB").tobytes(), expected.tobytes())
+        resized = expected.resize((192, 192), Image.Resampling.LANCZOS)
+        self.assertEqual(self.image.crop((492, 492, 684, 684)).tobytes(), resized.tobytes())
 
 
 if __name__ == "__main__":

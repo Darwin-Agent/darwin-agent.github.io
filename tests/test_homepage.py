@@ -54,9 +54,12 @@ class HomepageTests(unittest.TestCase):
         self.assertEqual(share_links, [official_url])
         self.assertNotIn("shaokun91.github.io", self.html)
 
-    def test_research_mission_explains_the_learning_loop(self):
-        self.assertIn("Experience informs action. Action generates feedback. Feedback drives evolution.", self.html)
-        self.assertIn("经验沉淀形成行动，行动反馈推动进化。", self.html)
+    def test_research_mission_avoids_an_explicit_motto(self):
+        self.assertIn("We study continuously learning agent systems across digital and physical worlds.", self.html)
+        self.assertNotIn("Experience informs action.", self.html)
+        self.assertNotIn("Feedback drives evolution.", self.html)
+        self.assertNotIn("经验沉淀形成行动，行动反馈推动进化。", self.html)
+        self.assertNotIn("learning-motto", self.html)
 
     def test_approach_section_describes_research_not_logo_construction(self):
         approaches = [attrs for tag, attrs in self.page.elements
