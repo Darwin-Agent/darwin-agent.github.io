@@ -58,7 +58,7 @@ http://localhost:8000
 ## Content themes
 
 - Experience → Action → Evolution as a system-level research ambition
-- A dedicated `#identity` section explaining D, A, their shared connection, and negative space
+- A dedicated `#learning` section introducing the research approach
 - Three stages connecting accumulated experience, action, and evaluated feedback
 - Harness as a first-class, evolvable behavior object
 - Memory as a lifecycle framework with provenance and governance
@@ -145,13 +145,6 @@ rebuilt to the same official team URL, with their original D-only logo.
 
 ### DA identity
 
-The monogram combines D (Darwin) and A (Agent) into one compact silhouette. The
-rounded D provides a stable, enclosing structure; the angular A emerges from it,
-with a shared connection and clear negative-space channels keeping both letters
-legible. This visual direction evokes accumulated experience becoming action,
-consistent with the team's emphasis on memory, feedback, and self-evolving agent
-systems. These are design intentions, not technical claims about the symbol.
-
 Use the orange transparent PNG on light or dark neutral backgrounds and the
 white variant where a reversed mark is needed. Preserve the clear space baked
 into the asset, do not stretch it, and do not add the old square border. Use the
@@ -159,7 +152,8 @@ monogram alone at small sizes; pair it with the existing Darwin Agent wordmark
 for larger website and presentation applications. A 40 px mark is used in the
 website navigation; the QR logo remains within its tested central safe area.
 
-The homepage also displays the original monogram at larger scale in `#identity`.
-The adjacent design explanation and three-stage learning loop connect the mark
-to the research agenda. This is a statement of research goals, not a claim that
-all public projects already implement an autonomous, end-to-end evolution loop.
+The homepage uses the mark in navigation, the footer, and the QR code. Public
+copy focuses on the team's research rather than explaining the letter geometry.
+The `#learning` section introduces the three-stage learning loop as a research
+goal, not a claim that all public projects already implement an autonomous,
+end-to-end evolution loop.

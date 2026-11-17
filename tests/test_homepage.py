@@ -54,23 +54,19 @@ class HomepageTests(unittest.TestCase):
         self.assertEqual(share_links, [official_url])
         self.assertNotIn("shaokun91.github.io", self.html)
 
-    def test_brand_story_explains_the_shared_identity(self):
+    def test_research_mission_explains_the_learning_loop(self):
         self.assertIn("Experience informs action. Action generates feedback. Feedback drives evolution.", self.html)
-        self.assertIn("D surrounds A.<br>A reaches outward.", self.html)
         self.assertIn("经验沉淀形成行动，行动反馈推动进化。", self.html)
 
-    def test_identity_has_a_visible_mark_and_three_design_principles(self):
-        identities = [attrs for tag, attrs in self.page.elements
-                      if tag == "section" and attrs.get("id") == "identity"]
-        self.assertEqual(len(identities), 1)
-        self.assertEqual(identities[0]["aria-labelledby"], "identity-title")
-        marks = [attrs for tag, attrs in self.page.elements
-                 if tag == "img" and "outward-reaching A" in attrs.get("alt", "")]
-        self.assertEqual(len(marks), 1)
-        for heading in ["D — Darwin", "A — Agent", "Two letters. One system."]:
-            self.assertIn(heading, self.html)
-        self.assertIn("Clear negative space", self.html)
-        self.assertIn('href="#identity"', self.html)
+    def test_approach_section_describes_research_not_logo_construction(self):
+        approaches = [attrs for tag, attrs in self.page.elements
+                      if tag == "section" and attrs.get("id") == "learning"]
+        self.assertEqual(len(approaches), 1)
+        self.assertEqual(approaches[0]["aria-labelledby"], "learning-title")
+        self.assertIn('href="#learning"', self.html)
+        for expression in ["surrounds A", "reaches outward", "环抱", "向外延伸",
+                           "negative space", "D — Darwin", "A — Agent", 'id="identity"']:
+            self.assertNotIn(expression, self.html)
 
     def test_experience_action_evolution_is_an_ordered_three_step_loop(self):
         steps = [attrs for tag, attrs in self.page.elements
@@ -173,7 +169,7 @@ class HomepageTests(unittest.TestCase):
         image_path = "./assets/darwin-mark-da-orange.png"
         marks = [attrs for tag, attrs in self.page.elements
                  if tag == "img" and attrs.get("src") == image_path]
-        self.assertEqual(len(marks), 3)
+        self.assertEqual(len(marks), 2)
         icons = [attrs for tag, attrs in self.page.elements
                  if tag == "link" and attrs.get("rel") == "icon"]
         self.assertEqual(icons[0]["href"], image_path)

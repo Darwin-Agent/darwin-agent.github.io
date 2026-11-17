@@ -94,28 +94,14 @@ html,body{overflow-x:hidden}
 .share-code figcaption{font:10px/1.5 monospace;color:var(--muted);margin-top:12px}
 .share-qr:focus-visible{outline:3px solid var(--xiaomi-orange);outline-offset:5px}
 .share-download:hover{color:#a64200}
-.identity{border-bottom:1px solid var(--line)}
-.identity .section-heading h2{font-size:clamp(46px,5.6vw,80px);line-height:1.04}
-.identity-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:7vw;align-items:center}
-.identity-mark{margin:0;padding:38px;border:1px solid var(--line);text-align:center}
-.identity-mark img{display:block;width:min(100%,360px);height:auto;margin:auto}
-.identity-mark figcaption{margin-top:24px;font-size:14px;color:var(--muted)}
-.identity-principles article{padding:24px 0;border-bottom:1px solid var(--line)}
-.identity-principles article:first-child{padding-top:0}
-.identity-principles .section-kicker{margin-bottom:10px;color:#a64200}
-.identity-principles h3{font-size:27px;margin-bottom:12px}
-.identity-principles article>p:last-child{margin-bottom:0;color:var(--muted);font-size:16px}
-.identity-motto{margin:54px 0 32px;text-align:center;font-size:clamp(18px,2vw,26px);line-height:1.7}
+.learning{border-bottom:1px solid var(--line)}
+.learning-motto{margin:48px 0 0;text-align:center;font-size:clamp(18px,2vw,26px);line-height:1.7}
 .evolution-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;list-style:none;margin:0;padding:0}
 .evolution-steps li{padding-top:24px;border-top:2px solid var(--xiaomi-orange)}
 .evolution-steps h3{font-size:23px;margin-bottom:14px}
 .evolution-steps li>p:last-child{color:var(--muted);margin-bottom:0}
 @media(max-width:800px){
-  .identity-grid{grid-template-columns:1fr;gap:38px}
-  .identity-mark{padding:28px}
-  .identity-mark img{max-width:280px}
-  .identity-principles h3{font-size:24px}
-  .identity-motto{margin-top:38px}
+  .learning-motto{margin-top:38px}
   .evolution-steps{grid-template-columns:1fr;gap:28px}
   .footer-share{grid-template-columns:1fr;gap:30px;padding-top:36px;margin-top:10px;text-align:center}
   .share-copy{margin-inline:auto}
